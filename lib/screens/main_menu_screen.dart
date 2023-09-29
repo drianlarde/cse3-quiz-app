@@ -1,39 +1,55 @@
+// Import the necessary packages for building UI and navigating between screens.
 import 'package:flutter/material.dart';
 import 'quiz_screen.dart';
 
+// Define MainMenuScreen as a StatefulWidget since it will manage local state.
 class MainMenuScreen extends StatefulWidget {
+  // Create and return an instance of _MainMenuScreenState.
   @override
   _MainMenuScreenState createState() => _MainMenuScreenState();
 }
 
+// Define the state class _MainMenuScreenState.
 class _MainMenuScreenState extends State<MainMenuScreen> {
+  // Define a key to uniquely identify the Form widget for validation.
   final _formKey = GlobalKey<FormState>();
+
+  // Define available quiz categories and their IDs.
   final _categories = {
     '9': 'General Knowledge',
     '12': 'Entertainment: Music',
-    // Add more categories here, pwede niyo gamitin yung existing categories sa Open Trivia DB API kaso andaming categories
+    // More categories can be added here.
   };
+
+  // Define available quiz difficulties.
   final _difficulties = ['easy', 'medium', 'hard'];
+
+  // Initialize the selected category, difficulty, and number of questions.
   String _selectedCategory = '9';
   String _selectedDifficulty = 'easy';
   int _numberOfQuestions = 10;
 
+  // Define the build method to construct the UI.
   @override
   Widget build(BuildContext context) {
+    // Return a Scaffold widget as the visual scaffold for the screen.
     return Scaffold(
+      // Set up the AppBar with a title.
       appBar: AppBar(
         title: const Text('CSE3 Quiz App'),
       ),
+      // Define the body of the screen as a Form widget.
       body: Form(
         key: _formKey,
         child: Padding(
+          // Add padding around the form content.
           padding: const EdgeInsets.all(16.0),
+          // Arrange form elements in a Column.
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: [
-                  // Add a title using const, please use const for all widgets
                   Icon(Icons.quiz, size: 100.0, color: Colors.blue),
                   const SizedBox(height: 20),
                   const Text(
