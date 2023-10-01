@@ -1,6 +1,7 @@
 // Import the necessary packages for building UI and navigating between screens.
 import 'package:flutter/material.dart';
 import 'quiz_screen.dart';
+import 'style_utils.dart';
 
 // Define MainMenuScreen as a StatefulWidget since it will manage local state.
 class MainMenuScreen extends StatefulWidget {
@@ -39,114 +40,136 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
         title: const Text('CSE3 Quiz App'),
       ),
       // Define the body of the screen as a Form widget.
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          // Add padding around the form content.
-          padding: const EdgeInsets.all(16.0),
-          // Arrange form elements in a Column.
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                children: [
-                  Icon(Icons.quiz, size: 100.0, color: Colors.blue),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Welcome to the CSE3 Quiz App!',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            // Add padding around the form content.
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+            // Arrange form elements in a Column.
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    // Add a title using const, please use const for all widgets
+                    Image.asset(
+                      'images/quiz-app-logo.png',
+                      width: 100.0,
+                      height: 100.0,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    'Please select a category, difficulty, and number of questions to start the quiz.',
-                    style: TextStyle(
-                      fontSize: 18.0,
+                    const SizedBox(height: 30),
+                    const Text(
+                      'Select your preferred category, level, and number of questions.',
+                      style: TextStyle(fontSize: 14.0, color: Colors.black),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 20),
-                  DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(labelText: 'Category'),
-                    items: _categories.keys
-                        .map((category) => DropdownMenuItem(
-                              value: category,
-                              child: Text(_categories[category]!),
-                            ))
-                        .toList(),
-                    value: _selectedCategory,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedCategory = value!;
-                      });
-                    },
-                  ),
-                  DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(labelText: 'Difficulty'),
-                    items: _difficulties
-                        .map((difficulty) => DropdownMenuItem(
-                              value: difficulty,
-                              child: Text(difficulty[0].toUpperCase() +
-                                  difficulty.substring(1)),
-                            ))
-                        .toList(),
-                    value: _selectedDifficulty,
-                    onChanged: (value) {
-                      setState(() {
-                        _selectedDifficulty = value!;
-                      });
-                    },
-                  ),
-                  TextFormField(
-                    decoration:
-                        const InputDecoration(labelText: 'Number of Questions'),
-                    initialValue: '10',
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || int.tryParse(value) == null) {
-                        return 'Please enter a valid number';
-                      }
-                      return null;
-                    },
-                    onSaved: (value) {
-                      _numberOfQuestions = int.parse(value!);
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      child: const Text('Start Quiz'),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => QuizScreen(
-                                category: _selectedCategory,
-                                difficulty: _selectedDifficulty,
-                                numberOfQuestions: _numberOfQuestions,
-                              ),
-                            ),
-                          );
-                        }
+                    const SizedBox(height: 20),
+                    DropdownButtonFormField<String>(
+                      decoration:
+                          dropdownStyle.copyWith(label: const Text('Category')),
+                      style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.0),
+                      items: _categories.keys
+                          .map((category) => DropdownMenuItem(
+                                value: category,
+                                child: Text(_categories[category]!),
+                              ))
+                          .toList(),
+                      value: _selectedCategory,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedCategory = value!;
+                        });
                       },
                     ),
-                  ),
-                ],
-              ),
-              const Text(
-                'Created by Abad, Abelarde, and Dasal',
-                style: TextStyle(
-                  fontSize: 12.0,
+                    const SizedBox(height: 20),
+                    DropdownButtonFormField<String>(
+                      decoration: dropdownStyle.copyWith(
+                          label: const Text('Difficulty')),
+                      style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.0),
+                      items: _difficulties
+                          .map((difficulty) => DropdownMenuItem(
+                                value: difficulty,
+                                child: Text(difficulty[0].toUpperCase() +
+                                    difficulty.substring(1)),
+                              ))
+                          .toList(),
+                      value: _selectedDifficulty,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedDifficulty = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      decoration: dropdownStyle.copyWith(
+                          label: const Text('Number of questions')),
+                      style: const TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 16.0),
+                      initialValue: '10',
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || int.tryParse(value) == null) {
+                          return 'Please enter a valid number';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _numberOfQuestions = int.parse(value!);
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFFBD553),
+                        ),
+                        child: const Text(
+                          'Start Quiz',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16.0,
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => QuizScreen(
+                                  category: _selectedCategory,
+                                  difficulty: _selectedDifficulty,
+                                  numberOfQuestions: _numberOfQuestions,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+                // const SizedBox(height: double.infinity),
+                const Text(
+                  'Created by Abad, Abelarde, and Dasal',
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
       ),
