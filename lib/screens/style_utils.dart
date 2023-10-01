@@ -9,7 +9,8 @@ const InputDecoration dropdownStyle = InputDecoration(
       borderSide: BorderSide(color: Colors.amberAccent, width: 2.0),
       borderRadius: BorderRadius.all(Radius.circular(8)),
       gapPadding: 4.0),
-  labelStyle: TextStyle(color: Colors.black),
+  labelStyle: TextStyle(
+      color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16.0),
   contentPadding: EdgeInsets.only(right: 8.0, left: 16.0),
   suffixIconColor: Colors.black,
 );

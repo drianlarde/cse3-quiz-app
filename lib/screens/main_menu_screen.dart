@@ -45,7 +45,8 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           key: _formKey,
           child: Padding(
             // Add padding around the form content.
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
             // Arrange form elements in a Column.
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,15 +59,6 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                       width: 100.0,
                       height: 100.0,
                     ),
-                    // seems redundant
-                    // const Text(
-                    //   'Welcome to the CSE3 Quiz App!',
-                    //   style: TextStyle(
-                    //     fontSize: 24.0,
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    //   textAlign: TextAlign.center,
-                    // ),
                     const SizedBox(height: 30),
                     const Text(
                       'Select your preferred category, level, and number of questions.',
@@ -76,16 +68,16 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                     const SizedBox(height: 20),
                     DropdownButtonFormField<String>(
                       decoration:
-                      dropdownStyle.copyWith(label: const Text('Category')),
+                          dropdownStyle.copyWith(label: const Text('Category')),
                       style: const TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.w600,
                           fontSize: 16.0),
                       items: _categories.keys
                           .map((category) => DropdownMenuItem(
-                        value: category,
-                        child: Text(_categories[category]!),
-                      ))
+                                value: category,
+                                child: Text(_categories[category]!),
+                              ))
                           .toList(),
                       value: _selectedCategory,
                       onChanged: (value) {
@@ -104,10 +96,10 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                           fontSize: 16.0),
                       items: _difficulties
                           .map((difficulty) => DropdownMenuItem(
-                        value: difficulty,
-                        child: Text(difficulty[0].toUpperCase() +
-                            difficulty.substring(1)),
-                      ))
+                                value: difficulty,
+                                child: Text(difficulty[0].toUpperCase() +
+                                    difficulty.substring(1)),
+                              ))
                           .toList(),
                       value: _selectedDifficulty,
                       onChanged: (value) {
@@ -145,7 +137,11 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                         ),
                         child: const Text(
                           'Start Quiz',
-                          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white, fontSize: 16.0,),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 16.0,
+                          ),
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
@@ -169,10 +165,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
                 // const SizedBox(height: double.infinity),
                 const Text(
                   'Created by Abad, Abelarde, and Dasal',
-                  style: TextStyle(
-                      fontSize: 12.0,
-                      color: Colors.grey
-                  ),
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
               ],
